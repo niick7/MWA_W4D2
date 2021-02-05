@@ -1,17 +1,36 @@
-const moongose = require("mongoose");
+const mongoose = require("mongoose");
 const dbURL = "mongodb://localhost:27017/SchoolDB"
 
-moongose.connect(dbURL, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbURL, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
 
-moongose.connection.on("connected", function(){
+mongoose.connection.on("connected", function(){
   console.log("MongoDB connected.");
 });
-moongose.connection.on("disconnected", function(){
+mongoose.connection.on("disconnected", function(){
   console.log("MongoDB disconnected.");
 });
-moongose.connection.on("error", function(err){
+mongoose.connection.on("error", function(err){
   console.log("MongoDB error: ", err);
 });
 
-require("./models/user");
+process.on("SIGINT", function() {
+  mongoose.connection.close(function(){
+    console.log("Mongo disconnected by app termination");
+    process.exit(0);
+  });
+})
+process.on("SIGTERM", function() {
+  mongoose.connection.close(function(){
+    console.log("Mongo disconnected by app termination");
+    process.exit(0);
+  });
+})
+process.once("SIGUSR2", function() {
+  mongoose.connection.close(function() {
+    console.log("Mongoose disconnected by app termination");
+    process.kill(process.pid, "SIGUSR2");
+  });
+})
+
 require("./models/course");
+require("./models/user");

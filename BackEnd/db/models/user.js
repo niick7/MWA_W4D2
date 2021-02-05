@@ -7,25 +7,24 @@ const courseSchema = mongoose.model("Course").schema;
 const userSchema = mongoose.Schema({
   userType: {
     type: String,
-    require: true,
+    required: true,
     "default": "Student"
   },
   email: {
     type: String,
-    require: true,
+    required: true,
     unique: true
   },
   password: {
     type: String,
-    require: true
+    required: true
   },
   fullName: {
     type: String,
-    require: true
+    required: true
   },
   image: {
-    type: String,
-    require: true
+    type: String
   },
   courses: [courseSchema]
 })
