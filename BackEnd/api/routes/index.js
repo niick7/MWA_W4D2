@@ -10,4 +10,10 @@ router.route("/users/:userId/courses/register").post(coursesController.register)
 
 router.route("/sign_in").post(authenticationController.signIn);
 
+router.route("/courses").get(coursesController.getCourses)
+                        .post(coursesController.addCourse)
+router.route("/courses/:id").get(coursesController.getCourse)
+                                  .put(coursesController.updateCourse)
+                                  .delete(coursesController.deleteCourse)
+
 module.exports = router;
