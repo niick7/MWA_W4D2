@@ -1,7 +1,9 @@
 Instructions
 
-This assignment is a buildup on the attendance prototype assignment.
+Enable the use of your MEAN attendance application on desktop, laptop, and cell phones.
 
-Add the following features to your application:
+- Use a different layout for each screen size.
 
-1- Faculty can manage the course registration (CRUD operations on registered students for a course).
+- Use different styles for each screen size.
+
+Question: How can you lock the application such that it only runs on one machine (or phone). Or any other security feature to prevent a student from taking attendance on behalf of someone else?
